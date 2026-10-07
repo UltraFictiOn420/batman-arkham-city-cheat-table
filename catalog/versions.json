@@ -1,0 +1,30 @@
+[
+  {
+    "version": "v1",
+    "status": "Historical; superseded; not recommended",
+    "path": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT",
+    "bytes": 32993,
+    "sha256": "89fe8f334eb17db64704ab4330daac0b4cbcc26a298069e705b7f73b0f61033f"
+  },
+  {
+    "version": "v2",
+    "status": "Historical; superseded; not recommended",
+    "path": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT",
+    "bytes": 33925,
+    "sha256": "5dac991ddb3b3d9ffd9fb083859d450273dad0aa47a9c9a2bb8b9ce7d9b9a169"
+  },
+  {
+    "version": "v3",
+    "status": "Core features user-tested; v4 experimental",
+    "path": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT",
+    "bytes": 34868,
+    "sha256": "38ac361c55ea24b513cf173cfb831dcaf52ff21837ad781ad3119e9d4ecad59f"
+  },
+  {
+    "version": "v4",
+    "status": "Awaiting gameplay test; syntax and simulated-write checks passed",
+    "path": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT",
+    "bytes": 35402,
+    "sha256": "e7667ea6e23374794d9e713e8f641196de44bacbc28cd6c210301e7cec213cbe"
+  }
+]

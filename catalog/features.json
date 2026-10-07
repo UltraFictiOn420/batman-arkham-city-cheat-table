@@ -1,0 +1,1274 @@
+[
+  {
+    "version": "v1",
+    "id": "1",
+    "category": "Top level",
+    "purpose": "[Required] Initialize Arkham City GOTY Table",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "10",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Player / Survival (Batman and DLC Characters)",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "11",
+    "category": "Player / Survival (Batman and DLC Characters)",
+    "purpose": "Infinite Health",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "12",
+    "category": "Player / Survival (Batman and DLC Characters)",
+    "purpose": "Keep Combat / Ballistic Armor Full (when available) [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "20",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Enemies / Combat",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "21",
+    "category": "Enemies / Combat",
+    "purpose": "Freeze Enemies [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "22",
+    "category": "Enemies / Combat",
+    "purpose": "Super Damage (10x-equivalent; Batarangs experimental) [-]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      189
+    ],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "23",
+    "category": "Enemies / Combat",
+    "purpose": "One-Hit Knockout (Batarangs experimental) [=]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      187
+    ],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "30",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Gadgets / Reach",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "31",
+    "category": "Gadgets / Reach",
+    "purpose": "Extra-Long Grapple Distance [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "32",
+    "category": "Gadgets / Reach",
+    "purpose": "Extra-Long Batarang Distance [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "40",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Gameplay / Time",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "41",
+    "category": "Gameplay / Time",
+    "purpose": "Freeze Story / Total Play Timer",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "42",
+    "category": "Gameplay / Time",
+    "purpose": "Game Speed 1.5x [Test - disable during cutscenes]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "43",
+    "category": "Gameplay / Time",
+    "purpose": "Slow Motion 0.5x [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "50",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Challenge Modes [Require Gameplay Testing]",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "51",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Combat Challenge HUD Score = Target [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "52",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Challenge Score Target",
+    "codeType": "4 Bytes",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "53",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Pause Challenge / Modifier Countdown Timer [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "54",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Reset Challenge Timer (countdown refills; count-up resets) [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "55",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Freeze Predator Challenge Timer [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "56",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Reset Predator Challenge Timer to 0 [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "60",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Positions / Teleport (same character session only)",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "61",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Save Position [J]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      74
+    ],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "62",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Teleport to Saved Position [K]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      75
+    ],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "63",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Undo / Redo Last Teleport [L]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      76
+    ],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "64",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Teleport Up 1 Body Height(s) [F1]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      112
+    ],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "65",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Teleport Up 2 Body Height(s) [F2]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      113
+    ],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "66",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Teleport Up 5 Body Height(s) [F3]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      114
+    ],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v1",
+    "id": "67",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Teleport Up 10 Body Height(s) [F4]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      115
+    ],
+    "table": "tables/history/v1/Batman Arkham City GOTY - Original v1.CT"
+  },
+  {
+    "version": "v2",
+    "id": "1",
+    "category": "Top level",
+    "purpose": "[Required] Initialize Arkham City GOTY Table",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "10",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Player / Survival (Batman and DLC Characters)",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "11",
+    "category": "Player / Survival (Batman and DLC Characters)",
+    "purpose": "Infinite Health",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "12",
+    "category": "Player / Survival (Batman and DLC Characters)",
+    "purpose": "Keep Combat / Ballistic Armor Full (when available) [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "20",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Enemies / Combat",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "21",
+    "category": "Enemies / Combat",
+    "purpose": "Freeze Enemies (AI / Movement; animations preserved) [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "22",
+    "category": "Enemies / Combat",
+    "purpose": "Super Damage (10x-equivalent; Batarangs experimental) [-]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      189
+    ],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "23",
+    "category": "Enemies / Combat",
+    "purpose": "One-Hit Knockout (Batarangs experimental) [=]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      187
+    ],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "30",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Gadgets / Reach",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "31",
+    "category": "Gadgets / Reach",
+    "purpose": "Extra-Long Grapple Distance [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "32",
+    "category": "Gadgets / Reach",
+    "purpose": "Extra-Long Batarang Distance [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "40",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Gameplay / Time",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "41",
+    "category": "Gameplay / Time",
+    "purpose": "Freeze Story / Total Play Timer",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "42",
+    "category": "Gameplay / Time",
+    "purpose": "Game Speed 1.5x [Test - disable during cutscenes]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "43",
+    "category": "Gameplay / Time",
+    "purpose": "Slow Motion 0.5x [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "50",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Challenge Modes [Require Gameplay Testing]",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "51",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Combat Challenge HUD Score = Target [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "52",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Challenge Score Target",
+    "codeType": "4 Bytes",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "53",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Pause Challenge / Modifier Countdown Timer [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "54",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Reset Challenge Timer (countdown refills; count-up resets) [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "55",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Freeze Predator Challenge Timer [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "56",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Reset Predator Challenge Timer to 0 [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "60",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Positions / Teleport (same character session only)",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "61",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Save Position [J]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      74
+    ],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "62",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Teleport to Saved Position [K]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      75
+    ],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "63",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Undo / Redo Last Teleport [L]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      76
+    ],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "64",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Teleport Up 1 Body Height(s) [F1]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      112
+    ],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "65",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Teleport Up 2 Body Height(s) [F2]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      113
+    ],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "66",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Teleport Up 5 Body Height(s) [F3]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      114
+    ],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v2",
+    "id": "67",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Teleport Up 10 Body Height(s) [F4]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      115
+    ],
+    "table": "tables/history/v2/Batman Arkham City GOTY - Original v2.CT"
+  },
+  {
+    "version": "v3",
+    "id": "1",
+    "category": "Top level",
+    "purpose": "[Required] Initialize Arkham City GOTY Table",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "2",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Runtime Status (read-only; no popup)",
+    "codeType": "String",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "10",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Player / Survival (Batman and DLC Characters)",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "11",
+    "category": "Player / Survival (Batman and DLC Characters)",
+    "purpose": "Infinite Health",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "20",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Enemies / Combat",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "21",
+    "category": "Enemies / Combat",
+    "purpose": "Freeze Enemies (AI / Movement; animations preserved) [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "22",
+    "category": "Enemies / Combat",
+    "purpose": "Super Damage (10x-equivalent; Batarangs experimental) [-]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      189
+    ],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "23",
+    "category": "Enemies / Combat",
+    "purpose": "One-Hit Knockout (Batarangs experimental) [=]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      187
+    ],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "30",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Gadgets / Reach",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "31",
+    "category": "Gadgets / Reach",
+    "purpose": "Extra-Long Grapple Distance [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "32",
+    "category": "Gadgets / Reach",
+    "purpose": "Extra-Long Batarang Distance [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "40",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Gameplay / Time",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "41",
+    "category": "Gameplay / Time",
+    "purpose": "Freeze Story / Total Play Timer",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "42",
+    "category": "Gameplay / Time",
+    "purpose": "Game Speed 1.5x [Test - disable during cutscenes]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "43",
+    "category": "Gameplay / Time",
+    "purpose": "Slow Motion 0.5x [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "50",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Challenge Modes [Require Gameplay Testing]",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "51",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Combat Challenge HUD Score = Target [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "52",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Challenge Score Target",
+    "codeType": "4 Bytes",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "53",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Pause Challenge / Modifier Countdown Timer [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "54",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Reset Challenge Timer (countdown refills; count-up resets) [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "55",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Freeze Predator Challenge Timer [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "56",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Reset Predator Challenge Timer to 0 [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "60",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Positions / Teleport (same character session only)",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "61",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Save Position [J]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      74
+    ],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "62",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Teleport to Saved Position [K]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      75
+    ],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "63",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Undo / Redo Last Teleport [L]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      76
+    ],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "64",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Teleport Up 1 Body Height(s) [F1]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      112
+    ],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "65",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Teleport Up 2 Body Height(s) [F2]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      113
+    ],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "66",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Teleport Up 5 Body Height(s) [F3]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      114
+    ],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v3",
+    "id": "67",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Teleport Up 10 Body Height(s) [F4]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      115
+    ],
+    "table": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT"
+  },
+  {
+    "version": "v4",
+    "id": "1",
+    "category": "Top level",
+    "purpose": "[Required] Initialize Arkham City GOTY Table",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "2",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Runtime Status (read-only; no popup)",
+    "codeType": "String",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "10",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Player / Survival (Batman and DLC Characters)",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "11",
+    "category": "Player / Survival (Batman and DLC Characters)",
+    "purpose": "Infinite Health",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "20",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Enemies / Combat",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "21",
+    "category": "Enemies / Combat",
+    "purpose": "Freeze Enemies (AI / Movement; animations preserved) [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "22",
+    "category": "Enemies / Combat",
+    "purpose": "Super Damage (10x-equivalent + Batarang KO) [-] [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      189
+    ],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "23",
+    "category": "Enemies / Combat",
+    "purpose": "One-Hit Knockout (Melee + Batarangs) [=] [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      187
+    ],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "30",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Gadgets / Reach",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "31",
+    "category": "Gadgets / Reach",
+    "purpose": "Extra-Long Grapple Distance [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "32",
+    "category": "Gadgets / Reach",
+    "purpose": "Extra-Long Batarang Distance [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "40",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Gameplay / Time",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "41",
+    "category": "Gameplay / Time",
+    "purpose": "Freeze Story / Total Play Timer",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "42",
+    "category": "Gameplay / Time",
+    "purpose": "Game Speed 1.5x [Test - disable during cutscenes]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "43",
+    "category": "Gameplay / Time",
+    "purpose": "Slow Motion 0.5x [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "50",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Challenge Modes [Require Gameplay Testing]",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "51",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Combat Challenge HUD Score = Target [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "52",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Challenge Score Target",
+    "codeType": "4 Bytes",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "53",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Pause Challenge / Modifier Countdown Timer [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "54",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Reset Challenge Timer (countdown refills; count-up resets) [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "55",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Freeze Predator Challenge Timer [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "56",
+    "category": "Challenge Modes [Require Gameplay Testing]",
+    "purpose": "Reset Predator Challenge Timer to 0 [Test]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "60",
+    "category": "[Required] Initialize Arkham City GOTY Table",
+    "purpose": "Positions / Teleport (same character session only)",
+    "codeType": "Category",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "61",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Save Position [J]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      74
+    ],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "62",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Teleport to Saved Position [K]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      75
+    ],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "63",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Undo / Redo Last Teleport [L]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      76
+    ],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "64",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Teleport Up 1 Body Height(s) [F1]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      112
+    ],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "65",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Teleport Up 2 Body Height(s) [F2]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      113
+    ],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "66",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Teleport Up 5 Body Height(s) [F3]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      114
+    ],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  },
+  {
+    "version": "v4",
+    "id": "67",
+    "category": "Positions / Teleport (same character session only)",
+    "purpose": "Teleport Up 10 Body Height(s) [F4]",
+    "codeType": "Lua / Auto Assembler wrapper",
+    "status": "See project testing notes; presence is not proof of working behavior",
+    "virtualKeyCodes": [
+      115
+    ],
+    "table": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT"
+  }
+]
