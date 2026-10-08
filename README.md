@@ -2,7 +2,7 @@
 
 Core features user-tested. In v5, the user also reports a phone countdown holding around 58-59 seconds and one-shot Batarang results. Remaining variants and table-only timer tests are documented. Archive prepared 2026-10-07 from surviving project artifacts and conversation test reports.
 
-Start with [v6, the current requested table](tables/recommended/v6/Batman Arkham City GOTY - Original v6.CT). It removes Gameplay / Time while keeping the existing core, phone-race, and challenge features. Code and simulated regression checks passed; this is not a claim that every challenge feature has been gameplay-tested.
+Start with [the v6 release](tables/recommended/v6/Batman Arkham City GOTY - Original v6.CT). It removes Gameplay / Time while keeping the existing core, phone-race, and challenge features. Code and simulated regression checks passed; this is not a claim that every challenge feature has been gameplay-tested.
 
 ## Navigation
 
@@ -27,6 +27,6 @@ Start with [v6, the current requested table](tables/recommended/v6/Batman Arkham
 
 The catalogs are inventories, not automatic gameplay validation. See the status document for actual evidence. Original .CT files are copied byte-for-byte; development sources are retained where available. No game binaries, private dumps, dependency packages, or third-party reference tables are included.
 
-Latest build: v6. The removed story-play-time freeze, 1.5x speed, and 0.5x slow motion remain available only in historical versions. See [v6 notes](docs/version-notes/Batman%20Arkham%20City%20GOTY%20-%20Original%20v6%20NOTES.md). A proposed one-key Riddler helper is [feasibility research only](docs/RIDDLER_FEASIBILITY.md), not an implemented cheat.
+Current release: v6. The removed story-play-time freeze, 1.5x speed, and 0.5x slow motion remain available only in historical versions. See [v6 release notes](docs/version-notes/Batman%20Arkham%20City%20GOTY%20-%20Original%20v6%20NOTES.md).
 
 Suggested GitHub issue labels: status:confirmed, status:partial, status:untested, status:abandoned, type:bug, type:feature, area:combat, area:survival, area:gadgets, area:teleport, area:timers, code:lua, code:auto-assembler, code:python, code:powershell. These are suggestions, not labels already created on GitHub.

@@ -36,9 +36,9 @@
   },
   {
     "version": "v6",
-    "status": "Current requested cleanup; Gameplay / Time removed; code and simulated regressions passed; inherited gameplay results and remaining tests documented",
+    "status": "Current v6 release; Gameplay / Time removed; inherited tested core and phone/Batarang results; remaining challenge and variant tests documented",
     "path": "tables/recommended/v6/Batman Arkham City GOTY - Original v6.CT",
-    "bytes": 35985,
-    "sha256": "76f822ebb687311a1dd2bf15ac003bd1a2b892c0b81c4931cab01c478a36324b"
+    "bytes": 35960,
+    "sha256": "ee5877e8306db3ecbc768e3f58eb8db0ab3c569a02075187c893d65500fd01ea"
   }
 ]

@@ -24,7 +24,7 @@ Subsequent user testing in v5: reached the phone with the countdown staying arou
 
 ## v6 - remove Gameplay / Time
 
-At the user's request, removed the entire Gameplay / Time category: story/total-play-time freeze, 1.5x speed, and 0.5x slow motion. Removed their runtime logic and unused metadata requirements too. Kept the separate working phone-race toggle and the existing Challenge Modes section. Build assertions, Lua syntax, and simulated regression tests passed. Riddler one-key puzzle assistance was discussed and inspected read-only; no solver was implemented or game function invoked.
+At the user's request, removed the entire Gameplay / Time category: story/total-play-time freeze, 1.5x speed, and 0.5x slow motion. Removed their runtime logic and unused metadata requirements too. Kept the separate working phone-race toggle and the existing Challenge Modes section. Build assertions, Lua syntax, and simulated regression tests passed. Finalized the existing feature set as the v6 release without adding new cheats.
 
 ## Current development source
 

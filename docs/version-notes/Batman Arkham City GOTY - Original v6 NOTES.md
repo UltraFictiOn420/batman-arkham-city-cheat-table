@@ -1,4 +1,4 @@
-# v6 - remove Gameplay / Time
+# v6 release
 
 Removed the entire Gameplay / Time category and its three scripts:
 
@@ -23,5 +23,3 @@ reaching the phone, and one-shot Batarangs. Remaining variants and phone toggle
 disable tests are still documented separately. v6 is a cleanup revision, not
 a claim that all challenge features have been gameplay-confirmed.
 
-No Riddler puzzle solver is included. The feasibility discussion is research,
-not a tested implementation or a promise of a universal completion flag.

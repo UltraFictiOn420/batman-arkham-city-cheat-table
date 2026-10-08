@@ -1,6 +1,6 @@
 # Status and testing
 
-Current table: v6, a requested cleanup of v5 with Gameplay / Time removed. v3 is the historical baseline for previously tested core features. The user reports successfully reaching a phone in v5 with the countdown holding around 58-59 seconds, and Batarangs knocking out thugs in one shot. v6 preserves those implementations. Remaining timer isolation/disable tests and gadget variants are listed below.
+Current release: v6, a requested cleanup of v5 with Gameplay / Time removed. v3 is the historical baseline for previously tested core features. The user reports successfully reaching a phone in v5 with the countdown holding around 58-59 seconds, and Batarangs knocking out thugs in one shot. v6 preserves those implementations. Remaining timer isolation/disable tests and gadget variants are listed below.
 
 | Feature | Evidence / status |
 | --- | --- |
@@ -46,4 +46,4 @@ The user loaded v5, found the phone, and observed the timer stay around 58-59 se
 
 ## v6 cleanup checks
 
-Removed category ID 40 and entries 41-43. Removed their runtime write branches and unused metadata requirements, while keeping challenge timer entries 53-56 and phone entry 71. Builder assertions verify all these conditions. Lua syntax and the existing live-read/simulated-write regression suite passed, including health, damage/KO masked restoration, ranges, teleports, phone race guards/disable behavior, and process/pointer guards. No live game writes or console changes were performed for the v6 cleanup or Riddler feasibility inspection. The new build should still be tested after disabling the old initializer to restore any old speed changes.
+Removed category ID 40 and entries 41-43. Removed their runtime write branches and unused metadata requirements, while keeping challenge timer entries 53-56 and phone entry 71. Builder assertions verify all these conditions. Lua syntax and the existing live-read/simulated-write regression suite passed, including health, damage/KO masked restoration, ranges, teleports, phone race guards/disable behavior, and process/pointer guards. No live game writes or console changes were performed for the v6 cleanup. Release finalization changed only comments and documentation; the executable scripts remain identical to the already checked v6 build. Disable the old initializer to restore any old speed changes before loading this release.
