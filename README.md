@@ -1,5 +1,7 @@
 # Batman Arkham City GOTY - Cheat Engine project
 
+Project paused at the user's request on 2026-10-08. v6 remains the current release. The proposed final v7 has not been built or released; remaining gameplay tests are preserved in the status document for a later return.
+
 Core features user-tested. In v5, the user also reports a phone countdown holding around 58-59 seconds and one-shot Batarang results. Remaining variants and table-only timer tests are documented. Archive prepared 2026-10-07 from surviving project artifacts and conversation test reports.
 
 Start with [the v6 release](tables/recommended/v6/Batman Arkham City GOTY - Original v6.CT). It removes Gameplay / Time while keeping the existing core, phone-race, and challenge features. Code and simulated regression checks passed; this is not a claim that every challenge feature has been gameplay-tested.
