@@ -26,5 +26,12 @@
     "path": "tables/experiments/batarang-knockout/v4/Batman Arkham City GOTY - Original v4.CT",
     "bytes": 35402,
     "sha256": "e7667ea6e23374794d9e713e8f641196de44bacbc28cd6c210301e7cec213cbe"
+  },
+  {
+    "version": "v5",
+    "status": "Phone countdown targeting and simulated tests passed; gameplay pending; retains v4 Batarang experiment",
+    "path": "tables/experiments/phone-race-countdown/v5/Batman Arkham City GOTY - Original v5.CT",
+    "bytes": 38497,
+    "sha256": "fa8af7cb456eb3f95905996587267d199c5a9ea5f9fb30636364fa5d9d16bd63"
   }
 ]

@@ -73,6 +73,21 @@ for o in brangs:assert rf(o+0x3fc)==50000
 C.flags.grappleRange=False;C.flags.batarangRange=False;C.loop()
 print('GADGET SUBCLASS / RANGE TESTS PASSED',len(grapples),len(brangs))
 print('COMBAT AND MASKED RESTORE TESTS PASSED')
+phone_managers=[v for _,v in C.phoneManagers.items() if C.live(v,'RSeqAct_ZsaszPhoneManager')]
+assert phone_managers,'Load the Zsasz phone mission area for this test'
+manager=phone_managers[0];phone=ri(manager+0x1d4)
+assert C.live(phone,'RSeqAct_HUDTimer')
+mf=ri(manager+0x1c8);tf=ri(phone+0xf4)
+write(manager+0x1c8,mf|0x4000,'int');write(phone+0xf4,tf|2,'int')
+before=len(writes);C.setFlag('phoneTimer',True)
+assert rf(phone+0xec)==59 and ri(phone+0xf0)==59
+assert {a for a,_,_ in writes[before:]}=={phone+0xec,phone+0xf0},'Phone toggle must only write its linked countdown'
+assert ri(manager+0x1c8)==mf|0x4000 and ri(phone+0xf4)==tf|2,'No mission or timer flag writes'
+write(manager+0x1c8,mf&~0x4000,'int');before=len(writes);C.holdPhoneTimer();assert len(writes)==before,'No writes to an unstarted race'
+write(manager+0x1c8,mf|0x4000,'int');write(phone+0xf4,tf&~2,'int');before=len(writes);C.holdPhoneTimer();assert len(writes)==before,'No writes after race timer stops'
+write(phone+0xf4,tf|2,'int');C.setFlag('phoneTimer',False);write(phone+0xec,12.5,'float');C.loop();assert rf(phone+0xec)==12.5,'Disabled phone toggle must not keep holding'
+write(manager+0x1c8,mf,'int');write(phone+0xf4,tf,'int')
+print('SCOPED PHONE TIMER / ACTIVE RACE / DISABLE TESTS PASSED')
 before=len(writes);current[0]=pid+1;C.loop();assert len(writes)==before
 current[0]=pid
 write(p+4,0xffffffff,'int');before=len(writes);C.loop();assert len(writes)==before

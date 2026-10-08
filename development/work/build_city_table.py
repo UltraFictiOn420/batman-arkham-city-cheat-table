@@ -44,6 +44,8 @@ time=group(40,'Gameplay / Time')
 flag(time,41,'Freeze Story / Total Play Timer','storyTimer')
 flag(time,42,'Game Speed 1.5x [Test - disable during cutscenes]','fast',other=43)
 flag(time,43,'Slow Motion 0.5x [Test]','slow',other=42)
+missions=group(70,'Side Missions / Phone Races')
+flag(missions,71,'Zsasz Phone Race Countdown = 59 Seconds [Test]','phoneTimer')
 challenge=group(50,'Challenge Modes [Require Gameplay Testing]')
 flag(challenge,51,'Combat Challenge HUD Score = Target [Test]','score')
 target=node(challenge,52,'Challenge Score Target');ET.SubElement(target,'VariableType').text='4 Bytes';ET.SubElement(target,'Address').text='AC_ChallengeScoreTarget'
@@ -57,9 +59,9 @@ action(teleport,62,'Teleport to Saved Position [K]','AC.teleport()',75)
 action(teleport,63,'Undo / Redo Last Teleport [L]','AC.undoTeleport()',76)
 for i,n in enumerate([1,2,5,10]):action(teleport,64+i,f'Teleport Up {n} Body Height(s) [F{i+1}]',f'AC.up({n})',112+i)
 ET.SubElement(table,'UserdefinedSymbols')
-ET.SubElement(table,'Comments').text='Original v4 testing revision for Steam Batman Arkham City GOTY. Adds enemy RBMPawnAI.bBatarangCanKill flag while Super Damage or One-Hit is enabled. Verified reflected offset 0x850/mask 0x100 and collision routine references; gameplay testing needed. Restores this bit when both modes are off. Working melee/health/range/position logic unchanged. Armor Full remains removed. No output popups or console edits. Disable old initializer before loading. Back up saves. Disable combat modifiers for scripted bosses/interrogations. Teleports do not stream maps or check walls; L undoes, J resaves. Challenge score is an unverified HUD-field test. Applied HP reductions persist until enemies respawn. Other gadgets are not claimed supported. Hotkeys J/K/L; F1-F4; main keyboard -/=. No armor, fly, combo, XP, upgrade-point, waypoint or scan/story-flag cheats.'
+ET.SubElement(table,'Comments').text='Original v5 testing revision for Steam Batman Arkham City GOTY. Adds a dedicated Zsasz phone-race countdown hold at 59 seconds, scoped through the live phone manager and active race flags. Toggle-off stops time writes rather than restoring an expired value. Metadata offsets/masks validated on activation. Gameplay completion and disable behavior need confirmation. Retains v4 enemy RBMPawnAI.bBatarangCanKill experiment while Super Damage or One-Hit is enabled; Batarang gameplay testing still needed. Restores the KO bit when both damage modes are off. Core melee/health/range/position logic unchanged. Armor Full remains removed. No output popups or console edits. Disable old initializer before loading. Back up saves. Disable combat modifiers for scripted bosses/interrogations. Teleports do not stream maps or check walls; L undoes, J resaves. Challenge score is an unverified HUD-field test. Applied HP reductions persist until enemies respawn. Other gadgets are not claimed supported. Hotkeys J/K/L; F1-F4; main keyboard -/=. No armor, fly, combo, XP, upgrade-point, waypoint or scan/story-flag cheats.'
 ET.indent(table,space='  ')
-out=ROOT/'outputs/Batman Arkham City GOTY - Original v4.CT'
+out=ROOT/'outputs/Batman Arkham City GOTY - Original v5.CT'
 ET.ElementTree(table).write(out,encoding='utf-8',xml_declaration=True)
 parsed=ET.parse(out)
 ids=[e.text for e in parsed.findall('.//CheatEntry/ID')];assert len(ids)==len(set(ids))
