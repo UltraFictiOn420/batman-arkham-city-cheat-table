@@ -1337,7 +1337,7 @@
     "category": "Enemies / Combat",
     "purpose": "Super Damage (10x-equivalent + Batarang KO) [-] [Test]",
     "codeType": "Lua / Auto Assembler wrapper",
-    "status": "See project testing notes; presence is not proof of working behavior",
+    "status": "Melee previously confirmed; Batarang one-shot success reported in v5, active mode/throw variant not specified",
     "virtualKeyCodes": [
       189
     ],
@@ -1349,7 +1349,7 @@
     "category": "Enemies / Combat",
     "purpose": "One-Hit Knockout (Melee + Batarangs) [=] [Test]",
     "codeType": "Lua / Auto Assembler wrapper",
-    "status": "See project testing notes; presence is not proof of working behavior",
+    "status": "Melee previously confirmed; Batarang one-shot success reported in v5, active mode/throw variant not specified",
     "virtualKeyCodes": [
       187
     ],
@@ -1441,7 +1441,7 @@
     "category": "Side Missions / Phone Races",
     "purpose": "Zsasz Phone Race Countdown = 59 Seconds [Test]",
     "codeType": "Lua / Auto Assembler wrapper",
-    "status": "See project testing notes; presence is not proof of working behavior",
+    "status": "User reports timer held around 58-59 and reached phone; independent timer/disable retest remains",
     "virtualKeyCodes": [],
     "table": "tables/experiments/phone-race-countdown/v5/Batman Arkham City GOTY - Original v5.CT"
   },
