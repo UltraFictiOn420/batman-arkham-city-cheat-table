@@ -1,0 +1,810 @@
+<?xml version='1.0' encoding='utf-8'?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"[Required] Initialize Arkham City GOTY Table"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+-- Original Arkham City GOTY runtime. No console unlocks or shared VM patches.
+if AC and AC.shutdown then AC.shutdown() end
+AC=nil
+openProcess('BatmanAC.exe')
+local base=getAddressSafe('BatmanAC.exe')
+if not base then error('Start Batman: Arkham City GOTY first.') end
+local C={version=6,pid=getOpenedProcessID(),base=base,flags={},names={},classes={},isa={},originals={},captures={},objects={},enemies={},gadgets={},projectiles={},timers={},phoneManagers={},frozen={},tick=0,damageWrites=0}
+local function ri(a) if not a then return end local ok,v=pcall(readInteger,a);if ok then return v end end
+local function rf(a) if not a then return end local ok,v=pcall(readFloat,a);if ok then return v end end
+local function wi(a,v) if a and v then return writeInteger(a,v) end end
+local function wf(a,v) if a and v then return writeFloat(a,v) end end
+local function bit(v,m) return v and v%(m*2)&gt;=m end
+local function setbit(v,m,on) if not v then return end if bit(v,m)~=on then return on and v+m or v-m end return v end
+C.ri,C.rf,C.wi,C.wf=ri,rf,wi,wf
+C.gnames=base+0x12019C8;C.gobjects=base+0x1243CE0
+function C.name(i)
+  if not i or i&lt;0 then return end
+  if C.names[i] then return C.names[i] end
+  local count=ri(C.gnames+4);local data=ri(C.gnames)
+  if not count or count&lt;1000 or count&gt;500000 or not data or i&gt;=count then return end
+  local entry=ri(data+i*4);if not entry or entry&lt;0x10000 then return end
+  local encoding=ri(entry+8);if not encoding then return end
+  local ok,n=pcall(readString,entry+0x10,192,bit(encoding,1))
+  if ok and n and n~='' then C.names[i]=n;return n end
+end
+function C.oname(o) if o and o&gt;0x10000 then return C.name(ri(o+0x1C)) end end
+function C.class(o) return o and ri(o+0x24) end
+function C.cn(o)
+  local c=C.class(o);if not c or c==0 then return end
+  if not C.classes[c] then C.classes[c]=C.oname(c) end
+  return C.classes[c]
+end
+function C.isA(o,n)
+  local c=C.class(o);if not c then return false end
+  local key=tostring(c)..':'..n
+  if C.isa[key]~=nil then return C.isa[key] end
+  for _=1,50 do
+    if not c or c&lt;0x10000 then break end
+    if C.oname(c)==n then C.isa[key]=true;return true end
+    c=ri(c+0x38)
+  end
+  C.isa[key]=false;return false
+end
+function C.registered(o)
+  if getOpenedProcessID()~=C.pid or not o or o&lt;0x10000 then return false end
+  local count=ri(C.gobjects+4);local data=ri(C.gobjects);local index=ri(o+4)
+  return count and data and index and index&gt;=0 and index&lt;count and ri(data+index*4)==o
+end
+function C.live(o,n)
+  if not C.registered(o) or not C.isA(o,n) then return false end
+  local name=C.oname(o)
+  if not name or name:sub(1,9)=='Default__' then return false end
+  if C.isA(o,'Actor') and (bit(ri(o+0xA0),8) or bit(ri(o+0xA4),0x4000000)) then return false end
+  return true
+end
+local function identity(o)
+  return {index=ri(o+4),class=C.class(o),name=ri(o+0x1C),number=ri(o+0x20),outer=ri(o+0x18)}
+end
+local function same(o,x)
+  return C.registered(o) and ri(o+4)==x.index and C.class(o)==x.class and ri(o+0x1C)==x.name and ri(o+0x20)==x.number and ri(o+0x18)==x.outer
+end
+function C.remember(key,o,offset,kind,mask)
+  C.originals[key]=C.originals[key] or {}
+  local a=o+offset;local map=C.originals[key]
+  if map[a] then return map[a].value end
+  local v=kind=='float' and rf(a) or ri(a)
+  if v~=nil then map[a]={owner=o,identity=identity(o),offset=offset,kind=kind,value=v,mask=mask} end
+  return v
+end
+function C.restore(key)
+  for a,e in pairs(C.originals[key] or {}) do
+    if same(e.owner,e.identity) then
+      if e.kind=='float' then wf(a,e.value)
+      elseif e.mask then wi(a,setbit(ri(a),e.mask,bit(e.value,e.mask)))
+      else wi(a,e.value) end
+    end
+  end
+  C.originals[key]=nil
+end
+local function bytes(a,n)
+  local ok,b=pcall(readBytes,a,n,true);if ok and b and #b==n then return b end
+end
+local function u32(b,i) return b[i]+b[i+1]*256+b[i+2]*65536+b[i+3]*16777216 end
+function C.scan()
+  if getOpenedProcessID()~=C.pid then return end
+  local count=ri(C.gobjects+4);local data=ri(C.gobjects)
+  if not count or not data or count&lt;1000 or count&gt;500000 then return end
+  local raw=bytes(data,count*4);if not raw then return end
+  -- Streamed classes can be garbage-collected and their address reused.
+  -- Rebuild class/hierarchy caches for each registry snapshot.
+  C.classes={};C.isa={}
+  local found,enemies,gadgets,projectiles,timers,phoneManagers={},{},{},{},{},{}
+  -- Class hierarchy is cached. Walk all objects so streamed actors and early
+  -- persistent controllers do not disappear from our snapshot.
+  for i=1,#raw,4 do
+    local o=u32(raw,i)
+    if o&gt;0x10000 then
+      local cn=C.cn(o)
+      if cn then
+        if (cn:find('PlayerController') and C.live(o,'RPlayerController')) then found.controller=o
+        elseif cn:find('ChallengeHUD') and C.live(o,'RGFxMovieChallengeHUD') then found.hud=o
+        elseif cn=='RSeqAct_HUDTimer' and C.live(o,cn) then timers[#timers+1]=o
+        elseif cn=='RSeqAct_ZsaszPhoneManager' and C.live(o,cn) then phoneManagers[#phoneManagers+1]=o
+        elseif (cn:find('Batarang') and C.live(o,'RBatarang')) or (cn:find('GrappleGun') and C.live(o,'RGrappleGun')) then gadgets[#gadgets+1]=o
+        elseif cn:find('BatarangProjectile') and C.registered(o) and C.isA(o,'RBatarangProjectile') then
+          -- Projectile class defaults are included to catch fast projectiles
+          -- spawned between object scans. Only their damage setting is edited.
+          projectiles[#projectiles+1]=o
+        elseif cn:find('PawnVillain') and C.live(o,'RPawnVillain') then enemies[#enemies+1]=o end
+      end
+    end
+  end
+  C.objects,C.enemies,C.gadgets,C.projectiles,C.timers=found,enemies,gadgets,projectiles,timers
+  C.phoneManagers=phoneManagers
+end
+function C.validatePhoneLayout()
+  local fields={['RSeqAct_ZsaszPhoneManager.raceTimer']={0x1D4},['RSeqAct_ZsaszPhoneManager.bRaceStarted']={0x1C8,0x4000},['RSeqAct_HUDTimer.RemainingTime']={0xEC},['RSeqAct_HUDTimer.IntRemainingTime']={0xF0},['RSeqAct_HUDTimer.bTimerRunning']={0xF4,2}}
+  local count=ri(C.gobjects+4);local data=ri(C.gobjects)
+  if not count or count&lt;1000 or count&gt;500000 or not data then error('Phone mission registry unavailable.') end
+  local raw=bytes(data,count*4);if not raw then error('Cannot validate phone mission fields.') end
+  for i=1,#raw,4 do
+    local o=u32(raw,i);local cn=o&gt;0x10000 and C.cn(o)
+    if cn and cn:sub(-8)=='Property' then
+      local key=(C.oname(ri(o+0x18)) or '')..'.'..(C.oname(o) or '')
+      local field=fields[key]
+      if field then
+        local packed=ri(o+0x3C)
+        if not packed or math.floor(packed/65536)~=field[1] or (field[2] and ri(o+0x58)~=field[2]) then error('Unsupported phone timer layout: '..key) end
+        fields[key]=nil
+      end
+    end
+  end
+  for key in pairs(fields) do error('Load the Zsasz phone mission first: metadata missing for '..key) end
+end
+function C.holdPhoneTimer()
+  local held=0
+  for _,m in ipairs(C.phoneManagers) do
+    if C.live(m,'RSeqAct_ZsaszPhoneManager') and bit(ri(m+0x1C8),0x4000) then
+      local t=ri(m+0x1D4)
+      if C.live(t,'RSeqAct_HUDTimer') and bit(ri(t+0xF4),2) then
+        wf(t+0xEC,59);wi(t+0xF0,59);held=held+1
+      end
+    end
+  end
+  C.phoneHeld=held
+end
+function C.pawn()
+  local controller=C.objects.controller
+  if not C.live(controller,'RPlayerController') then return end
+  local p=ri(controller+0x1B0)
+  if C.live(p,'RPawnPlayer') then return p end
+end
+local function finite(v) return v and v==v and math.abs(v)&lt;10000000 end
+function C.position(p)
+  local x,y,z=rf(p+0x48),rf(p+0x4C),rf(p+0x50)
+  if not finite(x) or not finite(y) or not finite(z) then error('Player position is not valid.') end
+  return {x=x,y=y,z=z,pawn=p,identity=identity(p),world=ri(p+0xC0)}
+end
+function C.move(target)
+  local p=C.pawn();if not p then error('No controlled character is loaded.') end
+  if not target then error('Save a position with J first.') end
+  if p~=target.pawn or not same(p,target.identity) or ri(p+0xC0)~=target.world then
+    error('Position belongs to a different character/loaded session. Save again with J.')
+  end
+  if not finite(target.x) or not finite(target.y) or not finite(target.z) then error('Invalid teleport destination.') end
+  C.undo=C.position(p)
+  wi(p+0x10C,0);wi(p+0x110,0);wi(p+0x114,0)
+  wf(p+0x48,target.x);wf(p+0x4C,target.y);wf(p+0x50,target.z)
+end
+function C.save() local p=C.pawn();if not p then error('No controlled character is loaded.') end C.saved=C.position(p) end
+function C.teleport() C.move(C.saved) end
+function C.undoTeleport() if not C.undo then error('No teleport to undo yet.') end C.move(C.undo) end
+function C.up(multiplier)
+  local p=C.pawn();if not p then error('No controlled character is loaded.') end
+  local component=ri(p+0x370)
+  if not C.registered(component) or not C.isA(component,'CylinderComponent') then error('Player collision cylinder is unavailable.') end
+  local half=rf(component+0x194);local scale=rf(p+0x60) or 1
+  if not half or half&lt;10 or half&gt;300 or scale&lt;=0 or scale&gt;10 then error('Invalid player height.') end
+  local target=C.position(p);target.z=target.z+half*2*scale*multiplier;C.move(target)
+end
+function C.deferOff(record)
+  local t=createTimer(nil,false);t.Interval=100
+  t.OnTimer=function(self) self.Enabled=false;pcall(function() record.Active=false end);self.destroy() end;t.Enabled=true
+end
+function C.action(record,fn)
+  local ok,e=pcall(fn);C.lastResult=ok and 'SUCCESS' or tostring(e)
+  if not ok and playSound then pcall(playSound,'SystemHand') end
+  C.deferOff(record)
+end
+function C.setFlag(name,on)
+  if on and name=='phoneTimer' then
+    C.scan();C.validatePhoneLayout()
+    if C.timer then C.timer.Enabled=true end
+    C.lastError=nil
+  end
+  C.flags[name]=on
+  if on and name=='phoneTimer' then C.holdPhoneTimer() end
+  if on and (name=='oneHit' or name=='superDamage') then
+    C.scan()
+    C.damageWrites=0
+    -- A previously stopped timer must not leave an enabled checkbox inert.
+    if C.timer then C.timer.Enabled=true end
+    C.lastError=nil
+  end
+end
+function C.status(text)
+  if C.statusAddress and getOpenedProcessID()==C.pid then pcall(writeString,C.statusAddress,text:sub(1,500)..'\0',false) end
+end
+local function hold(key,o,offset)
+  local entry=C.captures[key]
+  if not entry or not same(o,entry.identity) or entry.owner~=o then
+    entry={owner=o,identity=identity(o),value=rf(o+offset)};C.captures[key]=entry
+  end
+  if finite(entry.value) then wf(o+offset,entry.value) end
+end
+function C.resetPredator()
+  C.scan();local h=C.objects.hud
+  if not C.live(h,'RGFxMovieChallengeHUD') then error('Enter a predator challenge first.') end
+  wf(h+0x28C,0);C.captures.predator=nil
+end
+function C.resetChallenge()
+  C.scan();local changed=false
+  for _,t in ipairs(C.timers) do
+    if C.live(t,'RSeqAct_HUDTimer') and (bit(ri(t+0xF4),8) or bit(ri(t+0xF4),16)) then
+      -- Count-up: reset to zero. Countdown: restore the map's starting time.
+      local value=bit(ri(t+0xF4),4) and 0 or ri(t+0xDC)
+      if value and value&gt;=0 and value&lt;86400 then wf(t+0xEC,value);wi(t+0xF0,math.floor(value));changed=true end
+    end
+  end
+  if not changed then error('No active challenge HUD timer was found.') end
+end
+function C.loop()
+  if getOpenedProcessID()~=C.pid then return end
+  C.tick=C.tick+1
+  if C.tick%30==0 then C.scan() end
+  if C.flags.phoneTimer then C.holdPhoneTimer() else C.phoneHeld=0 end
+  local p=C.pawn()
+  if p and C.flags.health then
+    local max=ri(p+0x2C8);if not max or max&lt;=0 then max=ri(p+0xFE4) end
+    if max and max&gt;0 and max&lt;100000 then wi(p+0x2C4,max) end
+  end
+  for _,e in ipairs(C.enemies) do
+    if C.live(e,'RPawnVillain') and not C.isA(e,'RPawnPlayer') then
+      local hp=ri(e+0x2C4)
+      if (C.flags.oneHit or C.flags.superDamage) and hp and hp&gt;0 and C.isA(e,'RBMPawnAI') then
+        -- Verified in RBatarangProjectile.Touch: without this enemy flag,
+        -- stronger projectile damage still follows the non-KO hit behavior.
+        C.remember('batarangKO',e,0x850,'int',0x100)
+        wi(e+0x850,setbit(ri(e+0x850),0x100,true))
+      end
+      if C.flags.freeze and hp and hp&gt;0 then
+        -- Keep pawn ticks active: disabling them can prevent modular upper-body
+        -- meshes and animation/LOD attachments from being updated correctly.
+        local controller=ri(e+0x1CC)
+        if C.live(controller,'Controller') then C.remember('freeze',controller,0xA0,'int',0x40);wi(controller+0xA0,setbit(ri(controller+0xA0),0x40,true)) end
+        local entry=C.frozen[e]
+        if not entry or not same(e,entry.identity) then entry=C.position(e);C.frozen[e]=entry end
+        wi(e+0x10C,0);wi(e+0x110,0);wi(e+0x114,0)
+        wf(e+0x48,entry.x);wf(e+0x4C,entry.y);wf(e+0x50,entry.z)
+      elseif C.frozen[e] then
+        local controller=ri(e+0x1CC)
+        local map=C.originals.freeze
+        local saved=map and controller and map[controller+0xA0]
+        if saved and same(controller,saved.identity) then
+          wi(controller+0xA0,setbit(ri(controller+0xA0),0x40,bit(saved.value,0x40)));map[controller+0xA0]=nil
+        end
+        C.frozen[e]=nil
+      end
+      if C.flags.oneHit and hp and hp&gt;1 and hp&lt;100000 then
+        if wi(e+0x2C4,1) then C.damageWrites=C.damageWrites+1 end
+      elseif C.flags.superDamage and hp and hp&gt;0 then
+        local max=rf(e+0xB00)
+        if max and max&gt;0 and max&lt;100000 then local cap=math.max(1,math.floor(max/10));if hp&gt;cap then if wi(e+0x2C4,cap) then C.damageWrites=C.damageWrites+1 end end end
+      end
+    end
+  end
+  if not C.flags.freeze then
+    if C.originals.freeze then C.restore('freeze') end
+    C.frozen={}
+  end
+  if not C.flags.oneHit and not C.flags.superDamage and C.originals.batarangKO then C.restore('batarangKO') end
+  for _,b in ipairs(C.gadgets) do
+    if C.live(b,'RBatarang') and C.flags.batarangRange then
+      for _,off in ipairs({0x3FC,0x400}) do
+        local original=C.remember('batarangRange',b,off,'float')
+        if finite(original) and original&gt;=0 then wf(b+off,math.max(original,50000)) end
+      end
+    elseif C.live(b,'RGrappleGun') and C.flags.grappleRange then
+      for _,off in ipairs({0x3C8,0x3D0,0x3D8,0x45C,0x5DC}) do
+        local original=C.remember('grappleRange',b,off,'float')
+        -- Some native fields already contain very large limits; negative
+        -- values are special engine settings, not ordinary distances.
+        if finite(original) and original&gt;=0 then wf(b+off,math.max(original,50000)) end
+      end
+    end
+  end
+  if not C.flags.grappleRange and C.originals.grappleRange then C.restore('grappleRange') end
+  if not C.flags.batarangRange and C.originals.batarangRange then C.restore('batarangRange') end
+  if C.flags.oneHit or C.flags.superDamage then
+    for _,b in ipairs(C.projectiles) do
+      if C.registered(b) and C.isA(b,'RBatarangProjectile') and ((C.oname(b) or ''):sub(1,9)=='Default__' or C.live(b,'RBatarangProjectile')) then
+        local original=C.remember('batarangDamage',b,0x2CC,'float')
+        if original and original&gt;=0 and original&lt;100000 then wf(b+0x2CC,C.flags.oneHit and 10000 or math.max(1,original*10)) end
+      end
+    end
+  elseif C.originals.batarangDamage then C.restore('batarangDamage') end
+  local h=C.objects.hud
+  if C.live(h,'RGFxMovieChallengeHUD') then
+    if C.flags.score then local target=ri(C.score);if target and target&gt;=0 and target&lt;=99999999 then wi(h+0x1F4,target) end end
+    if C.flags.predatorTimer then hold('predator',h,0x28C) else C.captures.predator=nil end
+  else C.captures.predator=nil end
+  for _,t in ipairs(C.timers) do
+    if C.flags.challengeTimer and C.live(t,'RSeqAct_HUDTimer') and (bit(ri(t+0xF4),8) or bit(ri(t+0xF4),16)) then
+      C.remember('challengePause',t,0xF4,'int',1);wi(t+0xF4,setbit(ri(t+0xF4),1,true))
+    end
+  end
+  if not C.flags.challengeTimer and C.originals.challengePause then C.restore('challengePause') end
+  if C.tick%10==0 then
+    C.status(string.format('v6 | Tick %d | %s | Enemies %d | %s | HP edits %d | Phone timers held %d',C.tick,p and C.cn(p) or 'no player',#C.enemies,C.flags.oneHit and 'One-Hit ON' or C.flags.superDamage and 'Super Damage ON' or 'Damage OFF',C.damageWrites,C.phoneHeld or 0))
+  end
+end
+
+-- Fail closed on an unsupported layout, before allocating timers or writing.
+if C.name(0)~='None' then error('Unsupported Arkham City build: name registry mismatch.') end
+local count=ri(C.gobjects+4)
+if not count or count&lt;1000 or count&gt;500000 then error('Unsupported Arkham City build: object registry mismatch.') end
+-- Validate reflected field offsets against this loaded game's metadata.
+local required={['Pawn.Health']=0x2C4,['Pawn.HealthMax']=0x2C8,['Actor.Location']=0x48,['Actor.Velocity']=0x10C,['Controller.Pawn']=0x1B0,['RBatarang.BatarangRange']=0x3FC,['RGrappleGun.MaxGrappleHeight']=0x3C8,['RPawnVillain.MaxHealth']=0xB00,['Actor.bTickIsDisabled']=0xA0,['RGFxMovieChallengeHUD.TotalScore']=0x1F4,['RGFxMovieChallengeHUD.PredatorTime']=0x28C,['RBatarangProjectile.DefaultDamage']=0x2CC,['RSeqAct_HUDTimer.RemainingTime']=0xEC,['RBMPawnAI.bBatarangCanKill']=0x850}
+local raw=bytes(ri(C.gobjects),count*4)
+if not raw then error('Cannot read the Arkham City object registry.') end
+for i=1,#raw,4 do
+  local o=u32(raw,i)
+  if o&gt;0x10000 then
+    local cn=C.cn(o)
+    if cn and cn:sub(-8)=='Property' then
+      local key=(C.oname(ri(o+0x18)) or '')..'.'..(C.oname(o) or '')
+      if required[key] then
+        local packed=ri(o+0x3C)
+        if not packed or math.floor(packed/65536)~=required[key] then error('Unsupported field layout: '..key) end
+        if key=='RBMPawnAI.bBatarangCanKill' and ri(o+0x58)~=0x100 then error('Unsupported Batarang knockout flag mask.') end
+        required[key]=nil
+      end
+    end
+  end
+end
+for key in pairs(required) do error('Required game metadata missing: '..key) end
+C.score=allocateMemory(4);if not C.score then error('Unable to allocate table settings.') end
+registerSymbol('AC_ChallengeScoreTarget',C.score,true);wi(C.score,1000000)
+C.statusAddress=allocateMemory(512)
+if not C.statusAddress then pcall(unregisterSymbol,'AC_ChallengeScoreTarget');pcall(deAlloc,C.score);error('Unable to allocate status row.') end
+registerSymbol('AC_RuntimeStatus',C.statusAddress,true)
+C.status('v6 initialized; waiting for first tick')
+function C.shutdown()
+  if C.timer then C.timer.destroy();C.timer=nil end
+  local keys={};for k in pairs(C.originals) do keys[#keys+1]=k end
+  for _,k in ipairs(keys) do pcall(C.restore,k) end
+  pcall(unregisterSymbol,'AC_ChallengeScoreTarget')
+  pcall(unregisterSymbol,'AC_RuntimeStatus')
+  -- CE can release its allocation even if the user already closed the game.
+  if C.score and getOpenedProcessID()==C.pid then pcall(deAlloc,C.score) end
+  if C.statusAddress and getOpenedProcessID()==C.pid then pcall(deAlloc,C.statusAddress) end
+end
+C.scan();AC=C
+C.timer=createTimer(nil,false);C.timer.Interval=100
+C.timer.OnTimer=function()
+  if getOpenedProcessID()~=C.pid then C.timer.Enabled=false;return end
+  local ok,e=pcall(C.loop)
+  if not ok then C.lastError=tostring(e);C.timer.Enabled=false;C.status('PAUSED ERROR: '..C.lastError) end
+end
+C.timer.Enabled=true
+
+{$asm}
+[DISABLE]
+{$lua}
+if syntaxcheck then return end
+if AC and AC.shutdown then AC.shutdown() end
+AC=nil
+{$asm}</AssemblerScript>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1" />
+      <Color>008000</Color>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"Runtime Status (read-only; no popup)"</Description>
+          <VariableType>String</VariableType>
+          <Length>500</Length>
+          <Unicode>0</Unicode>
+          <Address>AC_RuntimeStatus</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"Player / Survival (Batman and DLC Characters)"</Description>
+          <Options moHideChildren="1" />
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>11</ID>
+              <Description>"Infinite Health"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if not AC then error('Enable Initialize Arkham City Table first.') end
+AC.setFlag('health',true)
+{$asm}
+[DISABLE]
+{$lua}
+if syntaxcheck then return end
+if AC then AC.setFlag('health',false) end
+{$asm}</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>20</ID>
+          <Description>"Enemies / Combat"</Description>
+          <Options moHideChildren="1" />
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>21</ID>
+              <Description>"Freeze Enemies (AI / Movement; animations preserved) [Test]"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if not AC then error('Enable Initialize Arkham City Table first.') end
+AC.setFlag('freeze',true)
+{$asm}
+[DISABLE]
+{$lua}
+if syntaxcheck then return end
+if AC then AC.setFlag('freeze',false) end
+{$asm}</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>22</ID>
+              <Description>"Super Damage (10x-equivalent + Batarang KO) [-] [Test]"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if not AC then error('Enable Initialize Arkham City Table first.') end
+local m=getAddressList().getMemoryRecordByID(23);if m and m.Active then m.Active=false end
+AC.setFlag('superDamage',true)
+{$asm}
+[DISABLE]
+{$lua}
+if syntaxcheck then return end
+if AC then AC.setFlag('superDamage',false) end
+{$asm}</AssemblerScript>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Toggle Activation</Action>
+                  <Keys>
+                    <Key>189</Key>
+                  </Keys>
+                  <ID>0</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>23</ID>
+              <Description>"One-Hit Knockout (Melee + Batarangs) [=] [Test]"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if not AC then error('Enable Initialize Arkham City Table first.') end
+local m=getAddressList().getMemoryRecordByID(22);if m and m.Active then m.Active=false end
+AC.setFlag('oneHit',true)
+{$asm}
+[DISABLE]
+{$lua}
+if syntaxcheck then return end
+if AC then AC.setFlag('oneHit',false) end
+{$asm}</AssemblerScript>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Toggle Activation</Action>
+                  <Keys>
+                    <Key>187</Key>
+                  </Keys>
+                  <ID>0</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>30</ID>
+          <Description>"Gadgets / Reach"</Description>
+          <Options moHideChildren="1" />
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>31</ID>
+              <Description>"Extra-Long Grapple Distance [Test]"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if not AC then error('Enable Initialize Arkham City Table first.') end
+AC.setFlag('grappleRange',true)
+{$asm}
+[DISABLE]
+{$lua}
+if syntaxcheck then return end
+if AC then AC.setFlag('grappleRange',false) end
+{$asm}</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>32</ID>
+              <Description>"Extra-Long Batarang Distance [Test]"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if not AC then error('Enable Initialize Arkham City Table first.') end
+AC.setFlag('batarangRange',true)
+{$asm}
+[DISABLE]
+{$lua}
+if syntaxcheck then return end
+if AC then AC.setFlag('batarangRange',false) end
+{$asm}</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>70</ID>
+          <Description>"Side Missions / Phone Races"</Description>
+          <Options moHideChildren="1" />
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>71</ID>
+              <Description>"Zsasz Phone Race Countdown = 59 Seconds [Test]"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if not AC then error('Enable Initialize Arkham City Table first.') end
+AC.setFlag('phoneTimer',true)
+{$asm}
+[DISABLE]
+{$lua}
+if syntaxcheck then return end
+if AC then AC.setFlag('phoneTimer',false) end
+{$asm}</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>50</ID>
+          <Description>"Challenge Modes [Require Gameplay Testing]"</Description>
+          <Options moHideChildren="1" />
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>51</ID>
+              <Description>"Combat Challenge HUD Score = Target [Test]"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if not AC then error('Enable Initialize Arkham City Table first.') end
+AC.setFlag('score',true)
+{$asm}
+[DISABLE]
+{$lua}
+if syntaxcheck then return end
+if AC then AC.setFlag('score',false) end
+{$asm}</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>52</ID>
+              <Description>"Challenge Score Target"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>AC_ChallengeScoreTarget</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>53</ID>
+              <Description>"Pause Challenge / Modifier Countdown Timer [Test]"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if not AC then error('Enable Initialize Arkham City Table first.') end
+AC.setFlag('challengeTimer',true)
+{$asm}
+[DISABLE]
+{$lua}
+if syntaxcheck then return end
+if AC then AC.setFlag('challengeTimer',false) end
+{$asm}</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>54</ID>
+              <Description>"Reset Challenge Timer (countdown refills; count-up resets) [Test]"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if not AC then error('Enable Initialize Arkham City Table first.') end
+AC.action(memrec,function() AC.resetChallenge() end)
+{$asm}
+[DISABLE]</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>55</ID>
+              <Description>"Freeze Predator Challenge Timer [Test]"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if not AC then error('Enable Initialize Arkham City Table first.') end
+AC.setFlag('predatorTimer',true)
+{$asm}
+[DISABLE]
+{$lua}
+if syntaxcheck then return end
+if AC then AC.setFlag('predatorTimer',false) end
+{$asm}</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>56</ID>
+              <Description>"Reset Predator Challenge Timer to 0 [Test]"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if not AC then error('Enable Initialize Arkham City Table first.') end
+AC.action(memrec,function() AC.resetPredator() end)
+{$asm}
+[DISABLE]</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>60</ID>
+          <Description>"Positions / Teleport (same character session only)"</Description>
+          <Options moHideChildren="1" />
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>61</ID>
+              <Description>"Save Position [J]"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if not AC then error('Enable Initialize Arkham City Table first.') end
+AC.action(memrec,function() AC.save() end)
+{$asm}
+[DISABLE]</AssemblerScript>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Toggle Activation</Action>
+                  <Keys>
+                    <Key>74</Key>
+                  </Keys>
+                  <ID>0</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>62</ID>
+              <Description>"Teleport to Saved Position [K]"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if not AC then error('Enable Initialize Arkham City Table first.') end
+AC.action(memrec,function() AC.teleport() end)
+{$asm}
+[DISABLE]</AssemblerScript>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Toggle Activation</Action>
+                  <Keys>
+                    <Key>75</Key>
+                  </Keys>
+                  <ID>0</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>63</ID>
+              <Description>"Undo / Redo Last Teleport [L]"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if not AC then error('Enable Initialize Arkham City Table first.') end
+AC.action(memrec,function() AC.undoTeleport() end)
+{$asm}
+[DISABLE]</AssemblerScript>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Toggle Activation</Action>
+                  <Keys>
+                    <Key>76</Key>
+                  </Keys>
+                  <ID>0</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>64</ID>
+              <Description>"Teleport Up 1 Body Height(s) [F1]"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if not AC then error('Enable Initialize Arkham City Table first.') end
+AC.action(memrec,function() AC.up(1) end)
+{$asm}
+[DISABLE]</AssemblerScript>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Toggle Activation</Action>
+                  <Keys>
+                    <Key>112</Key>
+                  </Keys>
+                  <ID>0</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>65</ID>
+              <Description>"Teleport Up 2 Body Height(s) [F2]"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if not AC then error('Enable Initialize Arkham City Table first.') end
+AC.action(memrec,function() AC.up(2) end)
+{$asm}
+[DISABLE]</AssemblerScript>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Toggle Activation</Action>
+                  <Keys>
+                    <Key>113</Key>
+                  </Keys>
+                  <ID>0</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>66</ID>
+              <Description>"Teleport Up 5 Body Height(s) [F3]"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if not AC then error('Enable Initialize Arkham City Table first.') end
+AC.action(memrec,function() AC.up(5) end)
+{$asm}
+[DISABLE]</AssemblerScript>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Toggle Activation</Action>
+                  <Keys>
+                    <Key>114</Key>
+                  </Keys>
+                  <ID>0</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>67</ID>
+              <Description>"Teleport Up 10 Body Height(s) [F4]"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if not AC then error('Enable Initialize Arkham City Table first.') end
+AC.action(memrec,function() AC.up(10) end)
+{$asm}
+[DISABLE]</AssemblerScript>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Toggle Activation</Action>
+                  <Keys>
+                    <Key>115</Key>
+                  </Keys>
+                  <ID>0</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols />
+  <Comments>Original v6 revision for Steam Batman Arkham City GOTY. Removes Gameplay / Time, story play-time freeze, 1.5x speed, and 0.5x slow motion, including their runtime logic. Retains the dedicated Zsasz phone-race countdown hold at 59 seconds and separate challenge-mode scripts. User reports v5 phone timer at 58-59 seconds and one-shot Batarang results; independent timer-disable and gadget-variant tests remain. Phone offsets/masks are validated on activation; only the active race-linked countdown is held. Damage KO bit restores when both damage modes are off. Core health/combat/range/position behavior unchanged. Armor Full remains removed. No Riddler puzzle solver, output popups, or console edits. Disable old initializer before loading so any old speed modification is restored. Back up saves. Disable combat modifiers for scripted bosses/interrogations. Teleports do not stream maps or check walls; L undoes, J resaves. Challenge score remains an unverified HUD-field test. Applied HP reductions persist until enemies respawn. Other gadgets are not claimed supported. Hotkeys J/K/L; F1-F4; main keyboard -/=. No armor, fly, combo, XP, upgrade-point, waypoint or scan/story-flag cheats.</Comments>
+</CheatTable>

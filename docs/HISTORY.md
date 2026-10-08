@@ -22,6 +22,10 @@ Responded to a live time-sensitive telephone race. Identified the Zsasz phone ma
 
 Subsequent user testing in v5: reached the phone with the countdown staying around 58-59, and Batarangs knocked out thugs in one shot. The emergency helper was confirmed to have already exited cleanly. Remaining independent timer/disable and gadget-variant tests are tracked in the status document; no implementation changes were needed for this success report.
 
-## Development source
+## v6 - remove Gameplay / Time
 
-development/work/build_city_table.py now generates v5 from arkham_city_runtime.lua and requires luaparser. It expects development/outputs to exist before writing. test_city_runtime.py requires lupa, a live matching game PID, the phone-mission area loaded, and the research memory reader; its writes are simulated in an overlay. Other inspection scripts may require capstone or pefile and local tool paths. Dependencies and third-party binaries are not bundled. The source is preserved as a research snapshot, not advertised as a portable one-command build.
+At the user's request, removed the entire Gameplay / Time category: story/total-play-time freeze, 1.5x speed, and 0.5x slow motion. Removed their runtime logic and unused metadata requirements too. Kept the separate working phone-race toggle and the existing Challenge Modes section. Build assertions, Lua syntax, and simulated regression tests passed. Riddler one-key puzzle assistance was discussed and inspected read-only; no solver was implemented or game function invoked.
+
+## Current development source
+
+development/work/build_city_table.py now generates v6 from arkham_city_runtime.lua and requires luaparser. It expects development/outputs to exist before writing. test_city_runtime.py requires lupa, a live matching game PID, the phone-mission area loaded, and the research memory reader; its writes are simulated in an overlay. Other inspection scripts may require capstone or pefile and local tool paths. Dependencies and third-party binaries are not bundled. The source is preserved as a research snapshot, not advertised as a portable one-command build.

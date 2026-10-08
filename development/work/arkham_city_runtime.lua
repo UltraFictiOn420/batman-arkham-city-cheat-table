@@ -4,7 +4,7 @@ AC=nil
 openProcess('BatmanAC.exe')
 local base=getAddressSafe('BatmanAC.exe')
 if not base then error('Start Batman: Arkham City GOTY first.') end
-local C={version=5,pid=getOpenedProcessID(),base=base,flags={},names={},classes={},isa={},originals={},captures={},objects={},enemies={},gadgets={},projectiles={},timers={},phoneManagers={},frozen={},tick=0,damageWrites=0}
+local C={version=6,pid=getOpenedProcessID(),base=base,flags={},names={},classes={},isa={},originals={},captures={},objects={},enemies={},gadgets={},projectiles={},timers={},phoneManagers={},frozen={},tick=0,damageWrites=0}
 local function ri(a) if not a then return end local ok,v=pcall(readInteger,a);if ok then return v end end
 local function rf(a) if not a then return end local ok,v=pcall(readFloat,a);if ok then return v end end
 local function wi(a,v) if a and v then return writeInteger(a,v) end end
@@ -98,7 +98,6 @@ function C.scan()
       local cn=C.cn(o)
       if cn then
         if (cn:find('PlayerController') and C.live(o,'RPlayerController')) then found.controller=o
-        elseif cn=='RPersistentData' and C.live(o,cn) then found.pdata=o
         elseif cn:find('ChallengeHUD') and C.live(o,'RGFxMovieChallengeHUD') then found.hud=o
         elseif cn=='RSeqAct_HUDTimer' and C.live(o,cn) then timers[#timers+1]=o
         elseif cn=='RSeqAct_ZsaszPhoneManager' and C.live(o,cn) then phoneManagers[#phoneManagers+1]=o
@@ -305,8 +304,6 @@ function C.loop()
       end
     end
   elseif C.originals.batarangDamage then C.restore('batarangDamage') end
-  local pd=C.objects.pdata
-  if C.flags.storyTimer and C.live(pd,'RPersistentData') then hold('story',pd,0x248) else C.captures.story=nil end
   local h=C.objects.hud
   if C.live(h,'RGFxMovieChallengeHUD') then
     if C.flags.score then local target=ri(C.score);if target and target>=0 and target<=99999999 then wi(h+0x1F4,target) end end
@@ -318,12 +315,8 @@ function C.loop()
     end
   end
   if not C.flags.challengeTimer and C.originals.challengePause then C.restore('challengePause') end
-  if C.flags.fast or C.flags.slow then
-    local world=p and ri(p+0xC0)
-    if C.live(world,'WorldInfo') then C.remember('speed',world,0x3F8,'float');wf(world+0x3F8,C.flags.fast and 1.5 or 0.5) end
-  elseif C.originals.speed then C.restore('speed') end
   if C.tick%10==0 then
-    C.status(string.format('v5 | Tick %d | %s | Enemies %d | %s | HP edits %d | Phone timers held %d',C.tick,p and C.cn(p) or 'no player',#C.enemies,C.flags.oneHit and 'One-Hit ON' or C.flags.superDamage and 'Super Damage ON' or 'Damage OFF',C.damageWrites,C.phoneHeld or 0))
+    C.status(string.format('v6 | Tick %d | %s | Enemies %d | %s | HP edits %d | Phone timers held %d',C.tick,p and C.cn(p) or 'no player',#C.enemies,C.flags.oneHit and 'One-Hit ON' or C.flags.superDamage and 'Super Damage ON' or 'Damage OFF',C.damageWrites,C.phoneHeld or 0))
   end
 end
 
@@ -332,7 +325,7 @@ if C.name(0)~='None' then error('Unsupported Arkham City build: name registry mi
 local count=ri(C.gobjects+4)
 if not count or count<1000 or count>500000 then error('Unsupported Arkham City build: object registry mismatch.') end
 -- Validate reflected field offsets against this loaded game's metadata.
-local required={['Pawn.Health']=0x2C4,['Pawn.HealthMax']=0x2C8,['Actor.Location']=0x48,['Actor.Velocity']=0x10C,['Controller.Pawn']=0x1B0,['RBatarang.BatarangRange']=0x3FC,['RGrappleGun.MaxGrappleHeight']=0x3C8,['RPersistentData.TotalTimePlayed']=0x248,['RPawnVillain.MaxHealth']=0xB00,['Actor.bTickIsDisabled']=0xA0,['RGFxMovieChallengeHUD.TotalScore']=0x1F4,['RGFxMovieChallengeHUD.PredatorTime']=0x28C,['RBatarangProjectile.DefaultDamage']=0x2CC,['RSeqAct_HUDTimer.RemainingTime']=0xEC,['WorldInfo.TimeDilation']=0x3F8,['RBMPawnAI.bBatarangCanKill']=0x850}
+local required={['Pawn.Health']=0x2C4,['Pawn.HealthMax']=0x2C8,['Actor.Location']=0x48,['Actor.Velocity']=0x10C,['Controller.Pawn']=0x1B0,['RBatarang.BatarangRange']=0x3FC,['RGrappleGun.MaxGrappleHeight']=0x3C8,['RPawnVillain.MaxHealth']=0xB00,['Actor.bTickIsDisabled']=0xA0,['RGFxMovieChallengeHUD.TotalScore']=0x1F4,['RGFxMovieChallengeHUD.PredatorTime']=0x28C,['RBatarangProjectile.DefaultDamage']=0x2CC,['RSeqAct_HUDTimer.RemainingTime']=0xEC,['RBMPawnAI.bBatarangCanKill']=0x850}
 local raw=bytes(ri(C.gobjects),count*4)
 if not raw then error('Cannot read the Arkham City object registry.') end
 for i=1,#raw,4 do
@@ -356,7 +349,7 @@ registerSymbol('AC_ChallengeScoreTarget',C.score,true);wi(C.score,1000000)
 C.statusAddress=allocateMemory(512)
 if not C.statusAddress then pcall(unregisterSymbol,'AC_ChallengeScoreTarget');pcall(deAlloc,C.score);error('Unable to allocate status row.') end
 registerSymbol('AC_RuntimeStatus',C.statusAddress,true)
-C.status('v5 initialized; waiting for first tick')
+C.status('v6 initialized; waiting for first tick')
 function C.shutdown()
   if C.timer then C.timer.destroy();C.timer=nil end
   local keys={};for k in pairs(C.originals) do keys[#keys+1]=k end

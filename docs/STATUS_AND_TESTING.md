@@ -1,6 +1,6 @@
 # Status and testing
 
-Baseline: v3 for the previously tested core features. Latest development table: v5. The user now reports successfully reaching a phone with the countdown holding around 58-59 seconds, and Batarangs knocking out thugs in one shot. v5 inherits the v4 Batarang change. Remaining timer isolation/disable tests and gadget variants are listed below.
+Current table: v6, a requested cleanup of v5 with Gameplay / Time removed. v3 is the historical baseline for previously tested core features. The user reports successfully reaching a phone in v5 with the countdown holding around 58-59 seconds, and Batarangs knocking out thugs in one shot. v6 preserves those implementations. Remaining timer isolation/disable tests and gadget variants are listed below.
 
 | Feature | Evidence / status |
 | --- | --- |
@@ -11,7 +11,8 @@ Baseline: v3 for the previously tested core features. Latest development table: 
 | Save / Teleport / Undo | User-confirmed |
 | Other damaging gadgets / RC Batarang | Not assumed supported; separate tests needed |
 | Freeze Enemies | Requires additional gameplay confirmation |
-| Story / challenge timers, scores, speed | Experimental or unconfirmed in relevant modes |
+| Story / total-play-time freeze and global speed | Removed from v6 at the user's request |
+| Challenge / predator timers and scores | Retained; experimental or unconfirmed in relevant modes |
 | Zsasz telephone race countdown | User loaded v5 and reached the phone while it stayed around 58-59; independent table-only and disable tests remain |
 
 ## Known regressions and precautions
@@ -42,3 +43,7 @@ The emergency helper runs for at most 20 minutes and exits if its linked timer e
 ## User gameplay report, 2026-10-07
 
 The user loaded v5, found the phone, and observed the timer stay around 58-59 seconds. They also reported Batarangs killed thugs in one shot. This supports successful gameplay results for those tested scenarios, not every gadget, firing mode, timer lifecycle, or mission-completion state. The user's statement that they found the phone is not independently treated as proof of every mission completion trigger.
+
+## v6 cleanup checks
+
+Removed category ID 40 and entries 41-43. Removed their runtime write branches and unused metadata requirements, while keeping challenge timer entries 53-56 and phone entry 71. Builder assertions verify all these conditions. Lua syntax and the existing live-read/simulated-write regression suite passed, including health, damage/KO masked restoration, ranges, teleports, phone race guards/disable behavior, and process/pointer guards. No live game writes or console changes were performed for the v6 cleanup or Riddler feasibility inspection. The new build should still be tested after disabling the old initializer to restore any old speed changes.

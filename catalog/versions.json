@@ -15,7 +15,7 @@
   },
   {
     "version": "v3",
-    "status": "Core features user-tested; v4 experimental",
+    "status": "Historical tested core baseline; use v6 for current requested feature set",
     "path": "tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT",
     "bytes": 34868,
     "sha256": "38ac361c55ea24b513cf173cfb831dcaf52ff21837ad781ad3119e9d4ecad59f"
@@ -33,5 +33,12 @@
     "path": "tables/experiments/phone-race-countdown/v5/Batman Arkham City GOTY - Original v5.CT",
     "bytes": 38497,
     "sha256": "fa8af7cb456eb3f95905996587267d199c5a9ea5f9fb30636364fa5d9d16bd63"
+  },
+  {
+    "version": "v6",
+    "status": "Current requested cleanup; Gameplay / Time removed; code and simulated regressions passed; inherited gameplay results and remaining tests documented",
+    "path": "tables/recommended/v6/Batman Arkham City GOTY - Original v6.CT",
+    "bytes": 35985,
+    "sha256": "76f822ebb687311a1dd2bf15ac003bd1a2b892c0b81c4931cab01c478a36324b"
   }
 ]

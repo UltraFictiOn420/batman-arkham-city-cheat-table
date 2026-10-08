@@ -2,7 +2,7 @@
 
 Core features user-tested. In v5, the user also reports a phone countdown holding around 58-59 seconds and one-shot Batarang results. Remaining variants and table-only timer tests are documented. Archive prepared 2026-10-07 from surviving project artifacts and conversation test reports.
 
-Start with [the recommended table](tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT). Review the testing notes before enabling scripts.
+Start with [v6, the current requested table](tables/recommended/v6/Batman Arkham City GOTY - Original v6.CT). It removes Gameplay / Time while keeping the existing core, phone-race, and challenge features. Code and simulated regression checks passed; this is not a claim that every challenge feature has been gameplay-tested.
 
 ## Navigation
 
@@ -27,6 +27,6 @@ Start with [the recommended table](tables/recommended/v3/Batman Arkham City GOTY
 
 The catalogs are inventories, not automatic gameplay validation. See the status document for actual evidence. Original .CT files are copied byte-for-byte; development sources are retained where available. No game binaries, private dumps, dependency packages, or third-party reference tables are included.
 
-Latest development build: [v5 phone-race countdown](tables/experiments/phone-race-countdown/v5/Batman%20Arkham%20City%20GOTY%20-%20Original%20v5.CT). The established baseline remains v3; v5's phone and Batarang additions now have user-reported gameplay success, with remaining test limitations recorded. See [v5 notes](docs/version-notes/Batman%20Arkham%20City%20GOTY%20-%20Original%20v5%20NOTES.md). Its research folder location is retained until the remaining regression tests are complete.
+Latest build: v6. The removed story-play-time freeze, 1.5x speed, and 0.5x slow motion remain available only in historical versions. See [v6 notes](docs/version-notes/Batman%20Arkham%20City%20GOTY%20-%20Original%20v6%20NOTES.md). A proposed one-key Riddler helper is [feasibility research only](docs/RIDDLER_FEASIBILITY.md), not an implemented cheat.
 
 Suggested GitHub issue labels: status:confirmed, status:partial, status:untested, status:abandoned, type:bug, type:feature, area:combat, area:survival, area:gadgets, area:teleport, area:timers, code:lua, code:auto-assembler, code:python, code:powershell. These are suggestions, not labels already created on GitHub.
