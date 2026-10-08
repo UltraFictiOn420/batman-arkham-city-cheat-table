@@ -1,5 +1,11 @@
 # Status and testing
 
+## Project state - paused, 2026-10-08
+
+The user chose to take a break and begin a separate Batman Arkham Origins project. Keep v6 as the current release. Final v7 was proposed but was not built or released, and remaining Test labels must not be removed merely because work is paused. No existing scripts were changed for this handoff.
+
+Resume checklist: freeze/unfreeze ordinary enemies; test both damage modes with aimed/quickfire Batarangs and their disable behavior; verify phone hold/disable without the exited helper; confirm challenge score affects results/medals; test pause/reset/resume in combat, Shock and Awe, and predator challenges. Other gadgets remain separately unconfirmed.
+
 Current release: v6, a requested cleanup of v5 with Gameplay / Time removed. v3 is the historical baseline for previously tested core features. The user reports successfully reaching a phone in v5 with the countdown holding around 58-59 seconds, and Batarangs knocking out thugs in one shot. v6 preserves those implementations. Remaining timer isolation/disable tests and gadget variants are listed below.
 
 | Feature | Evidence / status |
@@ -28,7 +34,7 @@ Current release: v6, a requested cleanup of v5 with Gameplay / Time removed. v3 
 2. Record whether the successful Batarang test used One-Hit or Super Damage and quickfire or aimed throws; separately check the remaining combinations.
 3. Disable both damage modes and verify restoration and ordinary enemy behavior.
 4. Test RC Batarang and other gadgets separately; record unsupported cases explicitly.
-5. Test freezes, other timers, challenge score persistence/medals, and speed individually.
+5. Test freeze/unfreeze, challenge score persistence/medals, and challenge pause/reset/resume separately in combat, Shock and Awe, and predator modes. Global speed was removed in v6 and is not part of the current test plan.
 
 Hotkeys retained: J/K/L for position actions, F1-F4 for teleport height, main-keyboard -/= for damage modes. Original version-specific notes are retained under docs/version-notes.
 
