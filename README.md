@@ -1,6 +1,6 @@
 # Batman Arkham City GOTY - Cheat Engine project
 
-Core features user-tested; v4 Batarang and v5 phone-race additions require gameplay confirmation. Archive prepared 2026-10-07 from surviving project artifacts and conversation test reports.
+Core features user-tested. In v5, the user also reports a phone countdown holding around 58-59 seconds and one-shot Batarang results. Remaining variants and table-only timer tests are documented. Archive prepared 2026-10-07 from surviving project artifacts and conversation test reports.
 
 Start with [the recommended table](tables/recommended/v3/Batman Arkham City GOTY - Original v3.CT). Review the testing notes before enabling scripts.
 
@@ -27,6 +27,6 @@ Start with [the recommended table](tables/recommended/v3/Batman Arkham City GOTY
 
 The catalogs are inventories, not automatic gameplay validation. See the status document for actual evidence. Original .CT files are copied byte-for-byte; development sources are retained where available. No game binaries, private dumps, dependency packages, or third-party reference tables are included.
 
-Latest development build: [v5 phone-race countdown](tables/experiments/phone-race-countdown/v5/Batman%20Arkham%20City%20GOTY%20-%20Original%20v5.CT). The established baseline remains v3; v5 also retains the unconfirmed v4 Batarang change. See [v5 notes](docs/version-notes/Batman%20Arkham%20City%20GOTY%20-%20Original%20v5%20NOTES.md).
+Latest development build: [v5 phone-race countdown](tables/experiments/phone-race-countdown/v5/Batman%20Arkham%20City%20GOTY%20-%20Original%20v5.CT). The established baseline remains v3; v5's phone and Batarang additions now have user-reported gameplay success, with remaining test limitations recorded. See [v5 notes](docs/version-notes/Batman%20Arkham%20City%20GOTY%20-%20Original%20v5%20NOTES.md). Its research folder location is retained until the remaining regression tests are complete.
 
 Suggested GitHub issue labels: status:confirmed, status:partial, status:untested, status:abandoned, type:bug, type:feature, area:combat, area:survival, area:gadgets, area:teleport, area:timers, code:lua, code:auto-assembler, code:python, code:powershell. These are suggestions, not labels already created on GitHub.
