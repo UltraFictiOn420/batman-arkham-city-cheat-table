@@ -28,3 +28,11 @@ Live inspection verified the phone-manager link, field offsets, masks, and
 temporary helper hold at 59 on two readings one second apart. Table gameplay,
 race completion, timer replacement, and toggle-disable behavior still require
 user confirmation. The v4 Batarang experiment remains unconfirmed.
+
+Update after user testing, 2026-10-07: the user loaded v5 and reached the phone
+with the countdown holding around 58-59 seconds. Batarangs also knocked out
+thugs in one shot. The temporary rescue helper was verified to have exited
+cleanly afterward. A subsequent table-only phone race and toggle-disable test
+remain advisable because the helper may have overlapped the first test. Exact
+Batarang firing variant/damage mode, RC Batarangs, and other gadgets remain
+separate tests. This report did not require any script changes.
