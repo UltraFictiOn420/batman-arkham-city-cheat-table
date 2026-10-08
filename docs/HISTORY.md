@@ -26,6 +26,10 @@ Subsequent user testing in v5: reached the phone with the countdown staying arou
 
 At the user's request, removed the entire Gameplay / Time category: story/total-play-time freeze, 1.5x speed, and 0.5x slow motion. Removed their runtime logic and unused metadata requirements too. Kept the separate working phone-race toggle and the existing Challenge Modes section. Build assertions, Lua syntax, and simulated regression tests passed. Finalized the existing feature set as the v6 release without adding new cheats.
 
-## Current development source
+## Paused before proposed final v7 - 2026-10-08
+
+Reviewed the remaining Test-tagged features and planned gameplay validation before a proposed final v7. The user then requested a break and a switch to Batman Arkham Origins. Retained v6 unchanged, recorded the unfinished checklist, and did not manufacture a final v7 or claim the untested challenge features were confirmed.
+
+## Source snapshot
 
 development/work/build_city_table.py now generates v6 from arkham_city_runtime.lua and requires luaparser. It expects development/outputs to exist before writing. test_city_runtime.py requires lupa, a live matching game PID, the phone-mission area loaded, and the research memory reader; its writes are simulated in an overlay. Other inspection scripts may require capstone or pefile and local tool paths. Dependencies and third-party binaries are not bundled. The source is preserved as a research snapshot, not advertised as a portable one-command build.
